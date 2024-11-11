@@ -1,0 +1,102 @@
+=======================================================
+THREE.JS MODEL ROTATION CONTROL - TECHNICAL DOCUMENTATION
+=======================================================
+
+TABLE OF CONTENTS
+----------------
+1. Overview
+2. Code Implementation
+3. Detailed Breakdown
+4. Example Calculations
+5. Visual Reference
+6. Usage Guidelines
+
+1. OVERVIEW
+-----------
+The model rotation control system implements interactive 3D model manipulation using mouse movement. 
+This creates a dynamic user interface where the model responds to cursor position, enabling intuitive 
+rotation control in both X and Y axes.
+
+2. CODE IMPLEMENTATION
+---------------------
+The core implementation consists of a mouse movement event listener:
+
+    window.addEventListener('mousemove', (e) => {
+        const rotationX = (e.clientX / window.innerWidth - 0.5) * Math.PI;
+        const rotationY = (e.clientY / window.innerHeight - 0.5) * Math.PI;
+        model.rotation.x = rotationY;
+        model.rotation.y = rotationX;
+    })
+
+3. DETAILED BREAKDOWN
+--------------------
+3.1 Event Listener Setup
+    - Attaches to window object
+    - Tracks mousemove events
+    - Provides MouseEvent object (e) with cursor coordinates
+
+3.2 Rotation Calculations
+    Components:
+    - e.clientX/Y: Raw mouse coordinates (pixels)
+    - window.innerWidth/Height: Browser window dimensions
+    - Calculation steps:
+        1. Normalize coordinates (0 to 1)
+        2. Center range (-0.5 to 0.5)
+        3. Convert to radians (*Math.PI)
+
+3.3 Model Rotation Application
+    - X-axis: Controlled by vertical mouse position (rotationY)
+    - Y-axis: Controlled by horizontal mouse position (rotationX)
+    - Rotation values in radians (-1.57 to 1.57)
+
+4. EXAMPLE CALCULATIONS
+----------------------
+4.1 Center Position
+    Mouse: (width/2, height/2)
+    Result: rotationX = 0, rotationY = 0
+    Effect: Model faces forward
+
+4.2 Left Edge
+    Mouse: (0, height/2)
+    Result: rotationX = -1.57
+    Effect: 90° left rotation
+
+4.3 Right Edge
+    Mouse: (width, height/2)
+    Result: rotationX = 1.57
+    Effect: 90° right rotation
+
+4.4 Top Edge
+    Mouse: (width/2, 0)
+    Result: rotationY = -1.57
+    Effect: 90° upward rotation
+
+5. VISUAL REFERENCE
+------------------
+Screen Coordinate System:
+
+    (0,0)                 (width,0)
+       +-------------------+
+       |                   |
+       |                   |
+       |      (center)     |
+       |                   |
+       |                   |
+       +-------------------+
+    (0,height)         (width,height)
+
+6. USAGE GUIDELINES
+------------------
+6.1 Movement Mapping
+    - Left/Right mouse movement → Y-axis rotation
+    - Up/Down mouse movement → X-axis rotation
+    - Movement is proportional to distance from screen center
+
+6.2 Best Practices
+    - Initialize model at center position
+    - Ensure smooth rotation transitions
+    - Consider adding rotation limits if
+
+=======================================================
+END OF DOCUMENTATION
+=======================================================

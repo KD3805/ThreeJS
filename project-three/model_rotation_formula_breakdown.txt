@@ -1,0 +1,94 @@
+FORMULA BREAKDOWN: (e.clientX / window.innerWidth - 0.5) * Math.PI
+
+Let's analyze using a window width of 1000px as an example:
+
+1. WHY DIVIDE BY window.innerWidth?
+--------------------------------
+e.clientX / window.innerWidth
+
+Purpose: Normalizes mouse position to a range of 0 to 1
+
+Example values:
+- Mouse at left edge:   0/1000 = 0
+- Mouse at center:    500/1000 = 0.5
+- Mouse at right edge: 1000/1000 = 1
+
+Without this: We'd have different rotation ranges for different screen sizes.
+
+2. WHY SUBTRACT 0.5?
+-------------------
+(e.clientX / window.innerWidth - 0.5)
+
+Purpose: Centers the range around zero, giving us -0.5 to +0.5
+
+Example values:
+- Mouse at left edge:   0 - 0.5 = -0.5
+- Mouse at center:    0.5 - 0.5 = 0
+- Mouse at right edge:  1 - 0.5 = 0.5
+
+Without this: The rotation would start from 0, making the model rotated 
+             90° by default instead of facing forward.
+
+3. WHY MULTIPLY BY Math.PI?
+--------------------------
+(e.clientX / window.innerWidth - 0.5) * Math.PI
+
+Purpose: Converts to radians and sets appropriate rotation range
+
+Example values (in radians):
+- Mouse at left edge:  -0.5 * π ≈ -1.57
+- Mouse at center:      0 * π = 0
+- Mouse at right edge:  0.5 * π ≈ 1.57
+
+Without this: The rotation range would be too small (-0.5 to 0.5 radians)
+
+COMPLETE CALCULATION EXAMPLES:
+----------------------------
+For a 1000px wide window:
+
+Left edge (x = 0):
+(0/1000 - 0.5) * π = -1.57 rad ≈ -90°
+
+Quarter-way (x = 250):
+(250/1000 - 0.5) * π = -0.785 rad ≈ -45°
+
+Center (x = 500):
+(500/1000 - 0.5) * π = 0 rad = 0°
+
+Three-quarters (x = 750):
+(750/1000 - 0.5) * π = 0.785 rad ≈ 45°
+
+Right edge (x = 1000):
+(1000/1000 - 0.5) * π = 1.57 rad ≈ 90°
+
+WHY THIS FORMULA WORKS WELL:
+---------------------------
+1. Screen Size Independence
+   - Works consistently across all device sizes
+   - Maintains same rotation range regardless of screen width
+
+2. Centered Rotation
+   - Model faces forward when mouse is centered
+   - Equal rotation range in both directions
+
+3. Intuitive Range
+   - Maximum rotation of ~90° in each direction
+   - Smooth, proportional response to mouse movement 
+   
+4. Mathematical Correctness
+   - Uses radians, which is Three.js's native rotation unit
+   - Provides precise control over rotation angles
+
+ALTERNATIVE APPROACHES (and why they're not as good):
+--------------------------------------------------
+1. Without normalization:
+   (e.clientX - window.innerWidth/2)
+   ❌ Would give different rotation ranges on different screens
+
+2. Without centering:
+   (e.clientX / window.innerWidth) * Math.PI
+   ❌ Model would start at 0° rotation instead of facing forward
+
+3. Different multiplier:
+   (e.clientX / window.innerWidth - 0.5) * 2
+   ❌ Wouldn't match Three.js's radian-based rotation system

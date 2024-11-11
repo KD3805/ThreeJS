@@ -1,0 +1,106 @@
+Three.js Fundamentals - A Simple Guide
+
+Three.js is a JavaScript library for 3D graphics in browsers:
+- Creates interactive 3D graphics and animations
+- Runs directly in web browsers without plugins
+- Built on top of WebGL (WebGL is a JavaScript API for rendering 3D graphics in web browsers)
+- Simplifies complex 3D programming concepts
+
+
+1. Core Building Blocks
+
+   Scene:
+   - Think of it as a stage or container where all your 3D objects live
+   - Everything you want to display must be added to the scene
+
+   Camera:
+   - Your "eye" into the 3D world
+   - Most common type is PerspectiveCamera which mimics human vision
+   - Key settings:
+     * Field of view: How wide you can see (like peripheral vision)
+     * Aspect ratio: Screen shape (width/height)
+     * Near/far: How close and far you can see  
+
+   Renderer:
+   - The painter that draws everything onto your screen
+   - Takes what the camera sees in the scene and displays it
+   - Uses WebGL technology to render 3D graphics 
+
+2. Creating 3D Objects
+
+   Mesh:
+   - Any 3D object is called a mesh
+   - Made of two parts:
+     * Geometry: The shape (cube, sphere, etc)
+     * Material: The appearance (color, texture, shininess)
+
+   Basic Shapes Available:
+   - BoxGeometry: Cubes and blocks
+   - SphereGeometry: Balls and rounded objects
+   - CylinderGeometry: Tubes and poles
+   - PlaneGeometry: Flat surfaces
+
+   Materials:
+   - MeshBasicMaterial: Simplest material, not affected by lights
+   - MeshStandardMaterial: More realistic, affected by lights
+
+
+3. Making Things Move
+
+   Transformations:
+   - Position: Move objects around (x,y,z coordinates)
+   - Rotation: Spin objects (around x,y,z axes)
+   - Scale: Make objects bigger or smaller
+
+   Animation:
+   - Uses requestAnimationFrame for smooth motion
+   - Clock helps track timing
+   - Can animate any property (position, rotation, color, etc)
+
+4. Making Things Look Good
+
+   Materials:
+   - Basic: Simple flat colors
+   - Phong: Shiny surfaces
+   - Lambert: Matte surfaces
+   - Can add textures (images) to surfaces
+
+   Lighting:
+   - Ambient: Overall scene brightness
+   - Directional: Sun-like light
+   - Point: Light bulb effect
+   - Spot: Focused beam of light
+
+5. Interaction
+
+   Controls:
+   - Orbit: Spin camera around object
+   - Fly: Move freely in space
+   - Drag: Move objects with mouse
+   
+   Responsive Design:
+   - Adjusts to window size
+   - Works on mobile devices
+   - Maintains performance
+
+6. Advanced Features
+
+   Models:
+   - Load pre-made 3D models
+   - Support for popular formats (GLTF/GLB)
+   - Can include animations
+
+   Special Effects:
+   - Shadows
+   - Transparency
+   - Custom shaders for unique looks
+   - Particle systems
+
+Getting Started Tips:
+1. Start with a simple scene (cube or sphere)
+2. Add basic movement
+3. Experiment with materials and lights
+4. Add user controls
+5. Build up complexity gradually
+
+Remember: Three.js makes 3D graphics easier, but it's still complex. Take time to understand each concept before moving forward.

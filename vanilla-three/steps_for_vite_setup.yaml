@@ -1,0 +1,19 @@
+# vite installation
+1. npm create vite@latest vanilla-three -- --template vanilla
+2. delete unnecessary files (i.e. counter.js, style.css, javascript.svg)
+
+# tailwind css installation
+3. npm install tailwindcss postcss autoprefixer
+4. npx tailwindcss init
+5. tailwind.config.js file created (change content in this file i.e. export default { content ["./index.html"] })
+6. index.css file created (add tailwind directives in this file)
+7. add ["build:css" :- "tailwindcss -i ./index.css -o ./style.css --watch"] script in package.json file  
+8. npm run build:css (used in package.json file to compile tailwind css)
+
+# three.js installation
+9. npm install three
+
+# adding 3d models (from sketchfab.com using gltf loader)
+10. npm install three/examples/jsm/loaders/GLTFLoader.js
+
+

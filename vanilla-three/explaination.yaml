@@ -1,0 +1,93 @@
+* tailwind CSS build:
+# used in package.json file to compile tailwind css
+
+The `build:css` script is used to compile Tailwind CSS. This command does the following:
+
+- `tailwindcss`: Uses the Tailwind CSS CLI tool
+- `-i ./index.css`: Uses `index.css` as the input file
+- `-o ./style.css`: Saves the compiled CSS in `style.css` as output file
+- `--watch`: Watches for file changes and recompiles automatically
+
+You can run this script with `npm run build:css` command. You should keep this script running while developing so Tailwind classes get processed automatically.
+
+
+
+* PMREMGenerator (Prefiltered, Mipmapped Radiance Environment Map Generator):
+An important Three.js tool used for PBR (Physically Based Rendering).
+
+Main functions:
+1. Environment Mapping
+   - Creates environment reflections on 3D models
+   - Adds reflection and lighting effects on models
+
+2. Prefiltering
+   - Processes HDR images
+   - Creates different blur versions for various roughness levels
+
+3. Key Effects
+   - Models appear more realistic
+   - Better reflections on materials 
+   - More physically accurate lighting
+
+4. Common Use Cases
+   - Metallic surfaces
+   - Glossy materials
+   - Reflective objects
+   - Realistic lighting simulation
+   - Interactive 3D applications
+   - Architectural visualization
+
+
+
+* Post Processing in Three.js:
+
+Post-processing refers to applying visual effects to a rendered image after the initial render is complete, similar to applying filters on Instagram.
+
+Main Components:
+1. EffectComposer
+   - Central manager for post-processing effects
+   - Coordinates multiple effects in sequence
+   - Takes renderer as input
+   - Replaces standard renderer.render() with composer.render()
+
+2. RenderPass
+   - Initial rendering step
+   - Creates base image from scene and camera
+   - Required as first pass in most cases
+   - Like taking a base photograph before editing
+
+3. ShaderPass & Effects
+   - Applies specific visual effects
+   - Common effects include:
+     * RGB Shift (chromatic aberration)
+     * Bloom
+     * Film grain
+     * Color correction
+   - Each effect is customizable via uniforms
+
+4. Common Use Cases
+   - Video game visual effects
+   - Cinematic looks
+   - Artistic styling
+   - Visual enhancement
+   - Motion effects
+   - Color grading
+
+5. Implementation Example
+   ```javascript
+   // Basic setup
+   const composer = new EffectComposer(renderer);
+   const renderPass = new RenderPass(scene, camera);
+   composer.addPass(renderPass);
+
+   // Effect example (RGB Shift)
+   const rgbShiftPass = new ShaderPass(RGBShiftShader);
+   rgbShiftPass.uniforms['amount'].value = 0.0030;
+   composer.addPass(rgbShiftPass);
+   ```
+
+Key Terms:
+- Shader: GPU program for visual effects
+- Pass: Single step in post-processing
+- Uniforms: Control variables for shaders
+- Composer: Manager for effect chain
